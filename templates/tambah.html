@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tambah Anggota - Data Ekstrakurikuler</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        button,
+        .btn-kembali {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-simpan {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-simpan:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-kembali {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .btn-kembali:hover {
+            background: #cbd5e1;
+        }
+
+        @media (max-width: 650px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="header">
+            <h1>➕ Tambah Anggota</h1>
+            <p>Tambahkan data anggota ekstrakurikuler baru.</p>
+        </div>
+
+        <form method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input
+                        type="text"
+                        id="nama"
+                        name="nama"
+                        placeholder="Masukkan nama lengkap"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="nis">NIS</label>
+                    <input
+                        type="text"
+                        id="nis"
+                        name="nis"
+                        placeholder="Masukkan NIS"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="kelas">Kelas</label>
+                    <input
+                        type="text"
+                        id="kelas"
+                        name="kelas"
+                        placeholder="Contoh: XII RPL 1"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                    <select id="jenis_kelamin" name="jenis_kelamin" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="L">Laki-laki</option>
+                        <option value="P">Perempuan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ekstrakurikuler">Ekstrakurikuler</label>
+                    <select id="ekstrakurikuler" name="ekstrakurikuler" required>
+                        <option value="">-- Pilih Ekstrakurikuler --</option>
+                        <option value="Futsal">Futsal</option>
+                        <option value="Basket">Basket</option>
+                        <option value="Voli">Voli</option>
+                        <option value="Badminton">Badminton</option>
+                        <option value="Pramuka">Pramuka</option>
+                        <option value="PMR">PMR</option>
+                        <option value="Paskibra">Paskibra</option>
+                        <option value="OSIS">OSIS</option>
+                        <option value="Musik">Musik</option>
+                        <option value="Tari">Tari</option>
+                        <option value="Teater">Teater</option>
+                        <option value="Karya Ilmiah">Karya Ilmiah</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <select id="kategori" name="kategori" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Olahraga">Olahraga</option>
+                        <option value="Seni">Seni</option>
+                        <option value="Organisasi">Organisasi</option>
+                        <option value="Akademik">Akademik</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label for="no_hp">No. HP</label>
+                    <input
+                        type="text"
+                        id="no_hp"
+                        name="no_hp"
+                        placeholder="Contoh: 081234567890"
+                    >
+                </div>
+
+            </div>
+
+            <div class="buttons">
+
+                <button type="submit" class="btn-simpan">
+                    💾 Simpan Anggota
+                </button>
+
+                <a href="{{ url_for('index') }}" class="btn-kembali">
+                    ← Kembali
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
