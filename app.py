@@ -183,7 +183,7 @@ def download():
         download_name="app.py"
     )
 
+init_db()
 
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True, host="127.0.0.1", port=5050)
