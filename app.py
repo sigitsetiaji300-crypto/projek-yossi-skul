@@ -4,7 +4,10 @@ import os
 
 app = Flask(__name__)
 
-DATABASE = "tmp/database.db"
+if os.environ.get("VERCEL"):
+    DATABASE = "/tmp/database.db"
+else:
+    DATABASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database.db")
 
 
 def get_db():
