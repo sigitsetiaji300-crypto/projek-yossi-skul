@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ekstrakurikuler | SMK Negeri 1 Wonosobo</title>
+    <style>
+        :root {
+            --navy: #102a56;
+            --blue: #2563eb;
+            --blue2: #3b82f6;
+            --bg: #f3f6fc;
+            --text: #17243b;
+            --muted: #718096;
+            --line: #e8edf5;
+            --white: #fff
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text)
+        }
+
+        .app {
+            display: flex;
+            min-height: 100vh
+        }
+
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #102a56, #173d78);
+            color: #fff;
+            padding: 28px 18px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 10px 30px;
+            border-bottom: 1px solid #ffffff20
+        }
+
+        .brand-mark {
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            background: #fff;
+            color: var(--navy);
+            display: grid;
+            place-items: center;
+            font-size: 22px;
+            font-weight: 800
+        }
+
+        .brand h2 {
+            font-size: 14px;
+            line-height: 1.35
+        }
+
+        .brand small {
+            display: block;
+            color: #b9c9e3;
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 3px
+        }
+
+        .nav-title {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: #9fb3d2;
+            font-weight: 700;
+            margin: 30px 12px 12px
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            color: #dce7f7;
+            text-decoration: none;
+            border-radius: 11px;
+            margin: 4px 0;
+            font-size: 14px;
+            transition: .2s
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #ffffff1c;
+            color: #fff
+        }
+
+        .nav .ico {
+            width: 20px;
+            text-align: center;
+            font-size: 16px
+        }
+
+        .side-note {
+            margin-top: auto;
+            padding: 15px;
+            background: #ffffff12;
+            border: 1px solid #ffffff20;
+            border-radius: 13px;
+            color: #d5e1f2;
+            font-size: 12px;
+            line-height: 1.6
+        }
+
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 30px 36px 40px
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 28px
+        }
+
+        .eyebrow {
+            color: var(--blue);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 7px
+        }
+
+        .topbar h1 {
+            font-size: 27px;
+            letter-spacing: -.6px
+        }
+
+        .topbar p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 6px
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 9px 13px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            font-size: 12px;
+            font-weight: 700
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: #e7efff;
+            color: var(--blue);
+            display: grid;
+            place-items: center;
+            font-size: 16px
+        }
+
+        .welcome {
+            background: linear-gradient(115deg, #173d78, #2563eb);
+            color: #fff;
+            border-radius: 19px;
+            padding: 25px 28px;
+            margin-bottom: 22px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 25px #1d4ed81c
+        }
+
+        .welcome:after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            border: 30px solid #ffffff12;
+            border-radius: 50%;
+            right: 7%;
+            top: -95px
+        }
+
+        .welcome h2 {
+            font-size: 20px;
+            margin-bottom: 7px
+        }
+
+        .welcome p {
+            font-size: 13px;
+            color: #dce8ff;
+            max-width: 570px;
+            line-height: 1.6
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 24px
+        }
+
+        .stat {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 18px #20365a08
+        }
+
+        .stat-icon {
+            width: 47px;
+            height: 47px;
+            border-radius: 14px;
+            background: #edf3ff;
+            display: grid;
+            place-items: center;
+            font-size: 21px
+        }
+
+        .stat h3 {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+            margin-bottom: 7px
+        }
+
+        .stat strong {
+            font-size: 26px;
+            color: var(--navy)
+        }
+
+        .panel {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            padding: 22px;
+            box-shadow: 0 5px 18px #20365a08;
+            margin-bottom: 22px
+        }
+
+        .panel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 16px
+        }
+
+        .panel-head h2 {
+            font-size: 17px
+        }
+
+        .panel-head p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 5px
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            background: var(--blue);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 5px 12px #2563eb2b;
+            transition: .2s
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px)
+        }
+
+        .tools {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 360px
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 11px 14px 11px 39px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+            background: #fbfcff
+        }
+
+        .search-box input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px #2563eb16
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8291a7
+        }
+
+        .search-count {
+            font-size: 11px;
+            color: var(--muted)
+        }
+
+        .no-search {
+            text-align: center;
+            padding: 24px;
+            color: var(--muted);
+            font-size: 13px;
+            display: none
+        }
+
+        .table-wrap {
+            overflow-x: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px
+        }
+
+        th {
+            text-align: left;
+            background: #f7f9fd;
+            color: #718096;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            padding: 13px 14px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #edf1f7;
+            font-size: 13px
+        }
+
+        tbody tr:hover {
+            background: #fafcff
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0
+        }
+
+        .student {
+            font-weight: 700;
+            color: #263852
+        }
+
+        .nis {
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .badge {
+            display: inline-block;
+            background: #edf3ff;
+            color: #2456ad;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700
+        }
+
+        .aksi {
+            display: flex;
+            gap: 7px
+        }
+
+        .aksi a {
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 10px;
+            border-radius: 8px
+        }
+
+        .edit {
+            background: #edf3ff;
+            color: #2456ad
+        }
+
+        .hapus {
+            background: #fff0f0;
+            color: #d33d3d
+        }
+
+        .empty {
+            text-align: center !important;
+            padding: 32px !important;
+            color: var(--muted)
+        }
+
+        .ekskul-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px
+        }
+
+        .ekskul-item {
+            border: 1px solid var(--line);
+            background: #fbfcff;
+            border-radius: 13px;
+            padding: 15px
+        }
+
+        .ekskul-item span {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .ekskul-item strong {
+            display: block;
+            color: var(--navy);
+            font-size: 22px;
+            margin-top: 7px
+        }
+
+        .ekskul-item small {
+            font-size: 11px;
+            color: var(--muted)
+        }
+
+        .footer {
+            text-align: center;
+            color: #9aa7b9;
+            font-size: 11px;
+            padding: 10px
+        }
+
+        @media(max-width:900px) {
+            .sidebar {
+                width: 215px
+            }
+
+            .main {
+                padding: 25px 22px
+            }
+        }
+
+        @media(max-width:680px) {
+            .tools {
+                align-items: stretch;
+                flex-direction: column
+            }
+
+            .search-box {
+                max-width: none
+            }
+
+            .app {
+                display: block
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 16px
+            }
+
+            .brand {
+                padding-bottom: 14px
+            }
+
+            .nav-title,
+            .side-note {
+                display: none
+            }
+
+            .nav {
+                display: flex;
+                gap: 6px;
+                margin-top: 12px
+            }
+
+            .nav a {
+                flex: 1;
+                justify-content: center;
+                padding: 10px 6px;
+                font-size: 11px
+            }
+
+            .main {
+                padding: 22px 15px
+            }
+
+            .topbar {
+                align-items: flex-start
+            }
+
+            .profile {
+                display: none
+            }
+
+            .topbar h1 {
+                font-size: 23px
+            }
+
+            .stats {
+                grid-template-columns: 1fr
+            }
+
+            .welcome {
+                padding: 22px
+            }
+
+            .panel {
+                padding: 16px
+            }
+
+            .panel-head {
+                align-items: flex-start;
+                flex-direction: column
+            }
+
+            .btn {
+                width: 100%
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">E</div>
+                <div>
+                    <h2>EKSTRAKURIKULER<small>SMK NEGERI 1 WONOSOBO</small></h2>
+                </div>
+            </div>
+            <div class="nav-title">MENU UTAMA</div>
+            <nav class="nav">
+                <a class="active" href="{{ url_for('index') }}"><span class="ico">▦</span> Dashboard</a>
+                <a href="#daftar"><span class="ico">👥</span> Data Anggota</a>
+                <a href="#rekap"><span class="ico">📊</span> Rekap Ekskul</a>
+            </nav>
+            <div class="side-note">Sistem informasi pendataan anggota ekstrakurikuler sekolah.<br><strong>Data tertata,
+                    kegiatan terpantau.</strong></div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <div class="eyebrow">Sistem Informasi Sekolah</div>
+                    <h1>Dashboard</h1>
+                    <p>Kelola data anggota ekstrakurikuler dengan mudah.</p>
+                </div>
+                <div class="profile">
+                    <div class="avatar">🏫</div><span>Admin Sekolah</span>
+                </div>
+            </header>
+
+            <section class="welcome">
+                <h2>Selamat Datang di Data Ekstrakurikuler 👋</h2>
+                <p>Panel pengelolaan data anggota ekstrakurikuler SMK Negeri 1 Wonosobo. Pantau jumlah anggota dan
+                    kelola data dalam satu tempat.</p>
+            </section>
+
+            <section class="stats">
+                <div class="stat">
+                    <div class="stat-icon">👥</div>
+                    <div>
+                        <h3>Total Anggota</h3><strong>{{ total }}</strong>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="stat-icon">🏅</div>
+                    <div>
+                        <h3>Jenis Ekstrakurikuler</h3><strong>{{ jumlah_ekskul }}</strong>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="stat-icon">🟢</div>
+                    <div>
+                        <h3>Status Sistem</h3><strong style="font-size:21px">Aktif</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel" id="daftar">
+                <div class="panel-head">
+                    <div>
+                        <h2>Daftar Anggota</h2>
+                        <p>Informasi seluruh siswa yang mengikuti ekstrakurikuler.</p>
+                    </div>
+                    <a href="/tambah" class="btn">＋ Tambah Anggota</a>
+                </div>
+                <div class="tools">
+                    <div class="search-box">
+                        <span class="search-icon">⌕</span>
+                        <input type="search" id="searchAnggota" placeholder="Cari nama, NIS, kelas, atau ekskul..."
+                            autocomplete="off" aria-label="Cari data anggota">
+                    </div>
+                    <span class="search-count" id="searchCount">Menampilkan semua data</span>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Siswa</th>
+                                <th>NIS</th>
+                                <th>Kelas</th>
+                                <th>L/P</th>
+                                <th>Ekstrakurikuler</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for siswa in anggota %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td><span class="student">{{ siswa.nama }}</span></td>
+                                <td><span class="nis">{{ siswa.nis }}</span></td>
+                                <td>{{ siswa.kelas }}</td>
+                                <td>{{ siswa.jenis_kelamin }}</td>
+                                <td><span class="badge">{{ siswa.ekstrakurikuler }}</span></td>
+                                <td class="aksi">
+                                    <a href="/edit/{{ siswa.id }}" class="edit">✎ Edit</a>
+                                    <a href="/hapus/{{ siswa.id }}" class="hapus"
+                                        onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="7" class="empty">📂 Belum ada data anggota. Silakan tambahkan data pertama.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr id="noSearchResult" style="display:none">
+                                <td colspan="7" class="empty">🔎 Data yang kamu cari tidak ditemukan.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel" id="rekap">
+                <div class="panel-head">
+                    <div>
+                        <h2>Rekap Anggota per Ekstrakurikuler</h2>
+                        <p>Jumlah siswa pada setiap kegiatan ekstrakurikuler.</p>
+                    </div>
+                </div>
+                <div class="ekskul-grid">
+                    {% for nama, jumlah in jumlah_per_ekskul.items() %}
+                    <div class="ekskul-item"><span>{{ nama }}</span><strong>{{ jumlah }}</strong><small>anggota
+                            terdaftar</small></div>
+                    {% else %}
+                    <div class="ekskul-item"><span>Belum ada ekstrakurikuler</span><strong>0</strong><small>anggota
+                            terdaftar</small></div>
+                    {% endfor %}
+                </div>
+            </section>
+            <div class="footer">© SMK Negeri 1 Wonosobo · Sistem Data Ekstrakurikuler</div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('searchAnggota');
+            const tableBody = document.querySelector('table tbody');
+            const countLabel = document.getElementById('searchCount');
+            const noResult = document.getElementById('noSearchResult');
+
+            if (!input || !tableBody) return;
+
+            // Hanya baris data anggota; baris pesan kosong dan hasil pencarian tidak ikut dihitung.
+            const rows = Array.from(tableBody.querySelectorAll('tr'))
+                .filter(row => row.id !== 'noSearchResult' && !row.querySelector('.empty'));
+
+            function filterRows() {
+                const keyword = input.value.trim().toLocaleLowerCase('id-ID');
+                let visible = 0;
+
+                rows.forEach(row => {
+                    const text = row.innerText.toLocaleLowerCase('id-ID');
+                    const match = text.includes(keyword);
+                    row.style.display = match ? '' : 'none';
+                    if (match) visible++;
+                });
+
+                if (noResult) noResult.style.display = (rows.length > 0 && visible === 0) ? '' : 'none';
+                if (countLabel) {
+                    countLabel.textContent = keyword
+                        ? visible + ' dari ' + rows.length + ' data ditemukan'
+                        : 'Menampilkan ' + rows.length + ' data';
+                }
+            }
+
+            input.addEventListener('input', filterRows);
+        });
+    </script>
+</body>
+
+</html>
